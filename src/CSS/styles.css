@@ -1,0 +1,108 @@
+/* Colours and sizes used across the page */
+:root {
+  --night: #0a1124;
+  --sky: #121d3b;
+  --accent: #ffb454;
+  --text: #f3f5fa;
+  --text-soft: #b9c3d6;
+
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --header-height: 4.5rem;
+  --radius: 0.375rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+/* Header */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 var(--gutter);
+}
+
+.wordmark,
+.call-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem; /* 44px tap target */
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.call-label {
+  color: var(--text-soft);
+  font-weight: 400;
+}
+
+/* Hero */
+.hero {
+  min-height: 100svh;
+  padding: calc(var(--header-height) + 2rem) var(--gutter) 17rem;
+  background: linear-gradient(to bottom, var(--night), var(--sky) 74%, var(--night));
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 1.55rem + 5.4vw, 5.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.hero-lede {
+  max-width: 34ch;
+  margin: 1.25rem 0 0;
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+/* Buttons */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.button-primary {
+  background: var(--accent);
+  color: var(--night);
+}
+
+.button-secondary {
+  border-color: rgb(243 245 250 / 0.5);
+}
