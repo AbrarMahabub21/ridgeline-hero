@@ -12,5 +12,24 @@ export function buildGrid(columns, rows) {
     }
   }
 
-  return new Float32Array(points);
+  const triangles = [];
+  const pointsPerRow = columns + 1;
+
+    for (let row = 0; row < rows; row++) {
+    for (let column = 0; column < columns; column++) {
+      // The four corners of this cell, as positions in the points list.
+      const nearLeft = row * pointsPerRow + column;
+      const nearRight = nearLeft + 1;
+      const farLeft = nearLeft + pointsPerRow;
+      const farRight = farLeft + 1;
+
+      triangles.push(nearLeft, nearRight, farLeft);
+      triangles.push(nearRight, farRight, farLeft);
+    }
+  }
+    return {
+    points: new Float32Array(points),
+    triangles: new Uint16Array(triangles),
+  };
+  
 }
