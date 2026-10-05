@@ -15,7 +15,7 @@ export function createRenderer(canvas){
 
 
 // Sending the grid points to the graphics card.
-const points = buildGrid(60,40);
+const points = buildGrid(120,80);
 gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
 gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);
 
