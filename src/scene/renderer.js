@@ -37,16 +37,25 @@ export function createRenderer(canvas){
 
   // Let nearer land hide the land behind it.
   gl.enable(gl.DEPTH_TEST)
-
+  // Finding the settings the vertex shader reads, so draw() can fill them in.
+  const aspectLocation = gl.getUniformLocation(program, 'u_aspect');
+  const horizonLocation = gl.getUniformLocation(program, 'u_horizon');
+  const peaksFromLocation = gl.getUniformLocation(program, 'u_peaksFrom');
+  const peakHeightLocation = gl.getUniformLocation(program, 'u_peakHeight');
     function resize(){
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
     gl.viewport(0, 0, canvas.width, canvas.height);
  }
-    function draw() {
-     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    function draw(scene) {
+    gl.uniform1f(aspectLocation, Math.max(canvas.width / canvas.height, 1));
+    gl.uniform1f(horizonLocation, scene.horizon);
+    gl.uniform1f(peaksFromLocation, scene.peaksFrom);
+    gl.uniform1f(peakHeightLocation, scene.peakHeight);
+
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.drawElements(gl.TRIANGLES, grid.triangles.length, gl.UNSIGNED_SHORT, 0);
- }
+  }
     return {resize, draw};
 }
 
