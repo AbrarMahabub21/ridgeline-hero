@@ -1,3 +1,4 @@
+@import "@fontsource-variable/archivo/wdth.css";
 /* Colours and sizes used across the page */
 :root {
   --night: #0a1124;
@@ -21,7 +22,7 @@ body {
   margin: 0;
   background: var(--night);
   color: var(--text);
-  font-family: system-ui, sans-serif;
+  font-family: "Archivo Variable",system-ui, sans-serif;
   line-height: 1.5;
 }
 
@@ -105,4 +106,60 @@ a {
 
 .button-secondary {
   border-color: rgb(243 245 250 / 0.5);
+}
+
+/* Keep the copy in a readable column */
+.hero-copy {
+  max-width: 44rem;
+}
+
+/* Hover and keyboard focus */
+.call-link:hover {
+  color: var(--accent);
+}
+
+.button-primary:hover {
+  background: #ffc67d;
+}
+
+.button-secondary:hover {
+  border-color: var(--text);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* Phone: the two buttons share the row equally */
+@media (max-width: 30rem) {
+  .hero-actions .button {
+    flex: 1 1 0;
+    padding: 0 1rem;
+  }
+}
+
+/* Tablet and up: taller header, slightly wider headline letters */
+@media (min-width: 40rem) {
+  :root {
+    --header-height: 5.5rem;
+  }
+
+  .hero h1 {
+    font-stretch: 104%;
+  }
+}
+
+/* Desktop: sizes follow the screen height, widest headline letters */
+@media (min-width: 75rem) {
+  .hero {
+    padding-top: calc(var(--header-height) + 8svh);
+    padding-bottom: 22svh;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.25rem, 10.5svh, 5.25rem);
+    font-stretch: 112%;
+  }
 }
