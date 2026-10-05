@@ -123,6 +123,7 @@ a {
 .hero-copy {
   max-width: 44rem;
   position: relative;
+  z-index: 1;
 }
 
 /* Hover and keyboard focus */
