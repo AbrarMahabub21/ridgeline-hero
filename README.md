@@ -1,10 +1,10 @@
 # Ridgeline Web Co: 3D hero
 
-Paid trial for built by mast: the hero section for Ridgeline Web Co, a fictional one-person web studio on the Gold Coast that builds websites for tradies.
+Trial for built by mast: the hero section for Ridgeline Web Co, a fictional one-person web studio on the Gold Coast that builds websites for tradies.
 
 - **Live:** https://ridgeline-hero.vercel.app
-- **Recording:** FILL IN (link)
-- - **Hours spent:** about 6 hours in total. Roughly 4 of that was building, and about 2 was learning WebGL, GLSL and shader maths, which were new to me.
+- **Recording:** https://drive.google.com/drive/folders/1WEVhb53A_WA19hOI1GY5OkdrLWCsi11G
+- **Hours spent:** about 6 hours in total. Roughly 4 of that was building, and about 2 was learning WebGL, GLSL and shader maths, which were new to me.
 
 ## Run it
 
@@ -22,7 +22,7 @@ No API keys and no paid services.
 The studio is called Ridgeline, so the scene is a mountain range drawn as ridgelines, with dawn light catching the slopes in the accent colour.
 
 - **Desktop:** a pool of amber light follows the cursor across the land, and the ground swells under it.
-- **Mobile:** dragging a finger moves the light, tilting the phone nudges it (Android), and scrolling sinks the land behind the page.
+- **Mobile:** tilting the phone nudges the light (Android), and scrolling sinks the land behind the page.
 - **Always:** the land rolls slowly toward the camera. After 4 seconds without input, the light wanders on its own so the scene never looks frozen.
 
 The scene never sits behind the text. JavaScript measures where the copy ends and passes that to the shader. On desktop the horizon sits under the copy and the mountains only rise to the right of it. On phones and tablets the horizon sits lower and the peaks are capped so they stay below the buttons.
@@ -74,7 +74,7 @@ Measured on the live site in an InPrivate browser window.
 ## Trade-offs
 
 - **WebGL 2 only.** The shaders use integer maths and `fwidth`, which need WebGL 2. Older browsers get the CSS fallback.
-- **No tilt on iPhone.** iOS only shares tilt after a permission pop-up, and a pop-up on first visit felt worse than no tilt. iPhones still get touch, scroll and the wandering light.
+- **No tilt on iPhone.** iOS only shares tilt after a permission pop-up, and a pop-up on first visit felt worse than no tilt. iPhones still get scroll and the wandering light.
 - **A placeholder block under the hero.** The brief says hero only, but the scroll effect and the off-screen pause can't be seen on a page that doesn't scroll, and the two buttons need somewhere to go. The block says it's out of scope.
 - **Colours are in two places.** The CSS has them as variables and the fragment shader has them as constants. A shader can't read CSS, so changing the accent means editing both.
 
@@ -101,7 +101,6 @@ Measured on the live site in an InPrivate browser window.
 
 ## Questions
 
-1. The email says $33.05/hr and the brief shows $30/hr. Which rate applies, and is it paid by invoice or as casual employment?
-2. Is the placeholder block under the hero OK, or would you rather it was removed?
-3. Would you want an opt-in tilt control for iPhone on client sites?
-4. Which phone do you use as "mid-range" when you check smoothness?
+1. Is the placeholder block under the hero OK, or would you rather it was removed?
+2. Would you want an opt-in tilt control for iPhone on client sites?
+3. Which phone do you use as "mid-range" when you check smoothness?
