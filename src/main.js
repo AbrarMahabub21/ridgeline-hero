@@ -34,7 +34,8 @@ function composeScene() {
     peakHeight = 3;
   }
 
-  return {
+    return {
+    horizonFromTop,
     horizon: 1 - 2 * horizonFromTop, // WebGL counts from -1 (bottom) to 1 (top)
     peaksFrom,
     peakHeight,
@@ -42,8 +43,13 @@ function composeScene() {
 }
 
 function render() {
+  const scene = composeScene();
+
+  // Tell the CSS where the horizon is, so the sky glow lines up with the land.
+  hero.style.setProperty('--horizon', `${scene.horizonFromTop * 100}%`);
+
   renderer.resize();
-  renderer.draw(composeScene());
+  renderer.draw(scene);
 }
 
 if (renderer) {

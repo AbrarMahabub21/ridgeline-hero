@@ -63,7 +63,13 @@ a {
 .hero {
   min-height: 100svh;
   padding: calc(var(--header-height) + 2rem) var(--gutter) 17rem;
-  background: linear-gradient(to bottom, var(--night), var(--sky) 74%, var(--night));
+  /* Where the land meets the sky, measured from the top. main.js keeps it up to date. */
+  --horizon: 74%;
+
+  /* Two layers: a soft amber glow on the horizon, over the night-sky fade. */
+  background:
+    radial-gradient(60% 42% at 82% var(--horizon), rgb(255 180 84 / 0.2), transparent 70%),
+    linear-gradient(to bottom, var(--night), var(--sky) var(--horizon), var(--night));
   position: relative;
   overflow: hidden;
 }

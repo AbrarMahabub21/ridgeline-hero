@@ -3,6 +3,8 @@
 in vec2 a_grid;
 out float v_row; // which ridgeline this point is on; whole numbers are where a line is drawn
 out float v_fade; // 1 near the camera, fading to 0 at the horizon
+out float v_light; // how much dawn light this point catches: 0 in shadow, 1 fully lit
+
 
 uniform float u_aspect;      // how much wider the view is than it is tall (never below 1)
 uniform float u_horizon;     // where the horizon sits on screen: -1 bottom, 1 top
@@ -12,6 +14,8 @@ uniform float u_peakHeight;  // how tall the tallest mountain can get
 const float FAR = 20.0;           // distance to the farthest row
 const float CAMERA_HEIGHT = 1.0;  // how high the camera is above the ground
 const float LINES = 44.0;         // how many ridgelines are drawn from near to far
+// The direction the dawn light comes from: the left, low in the sky, on the camera's side of the range.
+const vec3 SUN = vec3(-0.75, 0.30, -0.60);
 
 // A repeatable "random" number from 0 to 1 for a grid cell.
 // The same cell always gives the same number.
@@ -87,7 +91,20 @@ void main() {
 
   gl_Position = vec4(x, y, z, 1.0);
 
+ // Which way does the land face here? Measure the height a small step to the
+  // right and a small step further away, and build an arrow pointing straight
+  // out of the surface. That arrow is called the normal.
+  float nudge = 0.03 * depth;
+  float heightRight = terrainHeight(ground + vec2(nudge, 0.0));
+  float heightBehind = terrainHeight(ground + vec2(0.0, nudge));
+  vec3 normal = normalize(vec3(height - heightRight, nudge, height - heightBehind));
+
+  // Land facing the sun catches light. Crests catch more of it than valleys.
+  float facingSun = max(dot(normal, SUN), 0.0);
+  float crest = smoothstep(0.1, 0.5, height / u_peakHeight);
+
   // Values handed on to the fragment shader.
   v_row = a_grid.y * LINES;
   v_fade = 1.0 - smoothstep(FAR * 0.35, FAR, depth);
+  v_light = facingSun * mix(0.3, 1.0, crest);
 }
