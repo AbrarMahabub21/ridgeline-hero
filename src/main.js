@@ -9,6 +9,9 @@ const canvas = document.querySelector('.hero-scene');
 // The same breakpoint the CSS uses for the desktop layout.
 const desktop = window.matchMedia('(min-width: 75rem)');
 
+// True when the visitor has asked their device for less motion.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // ---------- Settings ----------
 const DRIFT_SPEED = 0.3;       // how fast the land rolls toward the camera, per second
 const POINTER_REST_MS = 4000;  // after this long without moving, the light wanders on its own
@@ -210,14 +213,23 @@ if (renderer) {
     renderer.draw(scene, frame);
   });
 
-  // Start listening to the pointer, scroll and tilt.
-  input = trackInput(hero);
+    // Reduced motion: stop here, with the one still picture.
+  // Otherwise, start the animation.
+  if (!reducedMotion) {
+    // Start listening to the pointer, scroll and tilt.
+    input = trackInput(hero);
 
-  // Pause when the hero scrolls out of view. The -1px margin means "at least
-  // one pixel must be showing", not just touching the edge of the screen.
-  const observer = new IntersectionObserver(onHeroVisibilityChange, { rootMargin: '-1px' });
-  observer.observe(hero);
+    // Pause when the hero scrolls out of view. The -1px margin means "at least
+    // one pixel must be showing", not just touching the edge of the screen.
+    const observer = new IntersectionObserver(onHeroVisibilityChange, { rootMargin: '-1px' });
+    observer.observe(hero);
 
-  // Pause when the tab is hidden.
-  document.addEventListener('visibilitychange', updateLoop);
+    // Pause when the tab is hidden.
+    document.addEventListener('visibilitychange', updateLoop);
+  }
+} else {
+  // No WebGL: show the CSS fallback instead, at the same horizon.
+  hero.classList.add('no-webgl');
+  const fallbackScene = composeScene();
+  hero.style.setProperty('--horizon', fallbackScene.horizonFromTop * 100 + '%');
 }

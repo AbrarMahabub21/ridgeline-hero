@@ -131,6 +131,23 @@ a {
   position: relative;
   z-index: 1;
 }
+
+/* No WebGL: hide the canvas and draw flat ridgelines with CSS instead */
+.hero.no-webgl .hero-scene {
+  display: none;
+}
+
+.hero.no-webgl::after {
+  content: "";
+  position: absolute;
+  top: var(--horizon);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: repeating-linear-gradient(to bottom, rgb(143 166 207 / 0.35) 0 1px, transparent 1px 14px);
+  mask-image: linear-gradient(to bottom, transparent, black 40%);
+}
+
 /* Outside the trial scope: a plain block under the hero */
 .beyond-hero {
   display: grid;
