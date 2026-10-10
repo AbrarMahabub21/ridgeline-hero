@@ -7,6 +7,9 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "vite": "^7.0.0"
   },
