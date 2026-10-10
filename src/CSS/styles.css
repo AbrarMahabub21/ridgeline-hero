@@ -18,6 +18,18 @@
   box-sizing: border-box;
 }
 
+/* Links to a spot on the page glide there instead of jumping */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ...except for visitors who asked their device for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   margin: 0;
   background: var(--night);
