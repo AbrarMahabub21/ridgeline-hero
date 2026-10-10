@@ -131,6 +131,21 @@ a {
   position: relative;
   z-index: 1;
 }
+/* Outside the trial scope: a plain block under the hero */
+.beyond-hero {
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  min-height: 100svh;
+  padding: var(--gutter);
+  border-top: 1px solid rgb(143 166 207 / 0.18);
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.beyond-hero p {
+  margin: 0;
+}
 
 /* Hover and keyboard focus */
 .call-link:hover {
